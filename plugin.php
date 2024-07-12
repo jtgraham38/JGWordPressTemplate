@@ -1,4 +1,18 @@
 <?php
+/**
+ * Plugin Name:       My WordPress Plugin
+ * Plugin URI:        https://example.com/my-plugin
+ * Description:       A brief description of the plugin.
+ * Version:           1.0.0
+ * Requires at least: 5.2
+ * Requires PHP:      7.2
+ * Author:            Jacob Graham
+ * Author URI:        https://jacob-t-graham.com
+ * License:           GPL v3 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
+ * Text Domain:       my-plugin
+ */
+
 //exit if accessed directly
 if (!defined('ABSPATH')) {
     exit;
