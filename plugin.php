@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Require Composer's autoload file
-require_once __DIR__ . '/vendor/autoload.php';
+require_once plugin_dir_path(__FILE__) . '/vendor/autoload.php';
 
 // Use statements for namespaced classes
 use jtgraham38\jgwordpresskit\Plugin;
