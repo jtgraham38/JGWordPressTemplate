@@ -182,7 +182,7 @@ if [ "$CLEAR_GIT" == "y" ]; then
     echo "Clearing out the template git repo..."
     rm -rf ./.git
     git init
-    git add *
+    git add .
     git commit -m "Initial commit!"
     echo "Template git repo cleared out."
 fi
