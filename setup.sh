@@ -181,6 +181,7 @@ read CLEAR_GIT
 if [ "$CLEAR_GIT" == "y" ]; then
     echo "Clearing out the template git repo..."
     rm -rf ./.git
+    git init
     echo "Template git repo cleared out."
 fi
 
