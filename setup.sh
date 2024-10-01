@@ -157,7 +157,7 @@ echo "Plugin prefix filled in."
 
 # fill in the composer fields in composer.json
 echo "Filling in composer.json..."
-sed -i "s/\"name\": \".*\",/\"name\": \"$PLUGIN_COMPOSER_NAME\",/" ./composer.json
+sed -i "0,/\"name\": \".*\",/\"name\": \"$PLUGIN_COMPOSER_NAME\",/" ./composer.json #matches only the first instance
 sed -i "s/\"description\": \".*\",/\"description\": \"$PLUGIN_DESCRIPTION\",/" ./composer.json
 sed -i "s/\"version\": \".*\",/\"version\": \"$PLUGIN_VERSION\",/" ./composer.json
 
@@ -174,7 +174,6 @@ if ! grep -q "setup.sh" ./.gitignore; then
 else
     echo "setup.sh already in .gitignore."
 fi
-
 
 #check if the user wants to clear out the template git repo
 echo "Would you like to clear out the template git repo? (y/n)"
