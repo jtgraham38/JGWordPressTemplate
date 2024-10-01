@@ -33,12 +33,23 @@ echo "Enter the plugin license uri (default 'https://www.gnu.org/licenses/gpl-3.
 read PLUGIN_LICENSE_URI
 PLUGIN_LICENSE_URI=${PLUGIN_LICENSE_URI:-"https://www.gnu.org/licenses/gpl-3.0.html"}
 
-
-MAIN_FILE=${MAIN_FILE:-"plugin.php"}
-
-PLUGIN_TEXT_DOMAIN=${PLUGIN_TEXT_DOMAIN:-"my-plugin"}
 echo "Enter the plugin text domain (default 'my-plugin'):"
-    read PLUGIN_TEXT_DOMAIN
+read PLUGIN_TEXT_DOMAIN
+PLUGIN_TEXT_DOMAIN=${PLUGIN_TEXT_DOMAIN:-"my-plugin"}
+
+#get plugin composer name
+while true; do
+    echo "Enter the plugin composer name (default 'jtgraham38/my-plugin'):"
+    read PLUGIN_COMPOSER_NAME
+    PLUGIN_COMPOSER_NAME=${PLUGIN_COMPOSER_NAME:-"jtgraham38/my-plugin"}
+
+    #ensure composer name is in the correct format
+    if [[ $PLUGIN_COMPOSER_NAME =~ ^[a-z0-9-]+/[a-z0-9-]+$ ]]; then
+        break
+    fi
+
+    echo "Composer name must be in the format 'vendor/package'."
+done
 
 #get plugin main file name
 while true; do
@@ -82,6 +93,7 @@ PLUGIN_VERSION=$(echo $PLUGIN_VERSION | sed 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/
 PLUGIN_LICENSE=$(echo $PLUGIN_LICENSE | sed 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
 PLUGIN_LICENSE_URI=$(echo $PLUGIN_LICENSE_URI | sed 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
 PLUGIN_TEXT_DOMAIN=$(echo $PLUGIN_TEXT_DOMAIN | sed 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
+PLUGIN_COMPOSER_NAME=$(echo $PLUGIN_COMPOSER_NAME | sed 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
 MAIN_FILE=$(echo $MAIN_FILE | sed 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
 PLUGIN_PREFIX=$(echo $PLUGIN_PREFIX | sed 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
 
@@ -95,6 +107,7 @@ echo "Version: $PLUGIN_VERSION"
 echo "License: $PLUGIN_LICENSE"
 echo "License URI: $PLUGIN_LICENSE_URI"
 echo "Text Domain: $PLUGIN_TEXT_DOMAIN"
+echo "Composer Name: $PLUGIN_COMPOSER_NAME"
 echo "Main File: $MAIN_FILE"
 echo "Prefix: $PLUGIN_PREFIX"
 echo "Is this information correct? (y/n)"
@@ -141,6 +154,12 @@ echo "README.md filled in.  Remember to finish filling in the rest of the README
 echo "Filling in plugin prefix..."
 sed -i "s/new Plugin(\".*\", plugin_dir_path( __FILE__ ), plugin_dir_url( __FILE__ ));/new Plugin(\"$PLUGIN_PREFIX\", plugin_dir_path( __FILE__ ), plugin_dir_url( __FILE__ ));/" ./$MAIN_FILE
 echo "Plugin prefix filled in."
+
+# fill in the composer fields in composer.json
+echo "Filling in composer.json..."
+sed -i "s/\"name\": \".*\",/\"name\": \"$PLUGIN_COMPOSER_NAME\",/" ./composer.json
+sed -i "s/\"description\": \".*\",/\"description\": \"$PLUGIN_DESCRIPTION\",/" ./composer.json
+sed -i "s/\"version\": \".*\",/\"version\": \"$PLUGIN_VERSION\",/" ./composer.json
 
 # run composer install to install plugin kit
 echo "Installing plugin kit..."
