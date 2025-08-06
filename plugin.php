@@ -29,7 +29,7 @@ use jtgraham38\jgwordpresskit\PluginFeature;
 $plugin = new Plugin("prefix_", plugin_dir_path( __FILE__ ), plugin_dir_url( __FILE__ ));
 
 //register features with the plugin manager here...
-//TODO: $feature = ... (import a PluginFeature() subclass);
+//TODO: $feature = ... (import and instantiate a PluginFeature() subclass);
 //TODO: $plugin->register_feature("feature_key", $feature);
 
 //init the plugin
