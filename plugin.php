@@ -30,7 +30,7 @@ $plugin = new Plugin("prefix_", plugin_dir_path( __FILE__ ), plugin_dir_url( __F
 
 //register features with the plugin manager here...
 //TODO: $feature = ... (import a PluginFeature() subclass);
-//TODO: $plugin->register_feature($feature);
+//TODO: $plugin->register_feature("feature_key", $feature);
 
 //init the plugin
 $plugin->init();
