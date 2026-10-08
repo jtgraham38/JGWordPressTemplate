@@ -26,3 +26,4 @@ Thumbs.db
 **/.gitignore
 /vendor/**/tests
 setup.sh
+scripts
