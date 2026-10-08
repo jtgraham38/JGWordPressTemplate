@@ -27,3 +27,4 @@ Thumbs.db
 /vendor/**/tests
 setup.sh
 scripts
+_scripts
